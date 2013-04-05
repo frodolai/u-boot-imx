@@ -1,0 +1,18 @@
+U-Boot for HB6MXS board
+-----------------------
+
+This file contains information for the port of 
+U-boot to the HB6MXS board.
+
+1. Building U-boot for HB6MXS
+-----------------------------
+To build U-boot for the HB6MXS board:
+
+  make hb6mxs_config
+  make
+
+2. Flashing U-boot into the SD/uSD card
+---------------------------------------
+  sudo dd if=u-boot.imx of=/dev/sdx bs=512 seek=2; sync
+  (replace sdx with correct node for SD card)
+
