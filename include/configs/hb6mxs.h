@@ -152,12 +152,24 @@
 
 #define CONFIG_DRIVE_TYPES CONFIG_DRIVE_SATA CONFIG_DRIVE_MMC
 
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	"console=ttymxc1\0" \
-	"clearenv=if sf probe || sf probe || sf probe 1 ; then " \
-		"sf erase 0xc0000 0x2000 && " \
-		"echo restored environment to factory default ; fi\0" \
-	"bootcmd=for dtype in " CONFIG_DRIVE_TYPES \
+//* Hobart start-- */
+#define	CONFIG_EXTRA_ENV_SETTINGS					\
+		"netdev=eth0\0"						\
+		"ethprime=FEC0\0"					\
+		"uboot=u-boot.bin\0"			\
+		"kernel=uImage\0"				\
+		"nfsroot=/opt/eldk/arm\0"				\
+		"bootargs_base=setenv bootargs console=ttymxc3,115200 "\
+		"vmalloc=400M consoleblank=0 nosmp arm_freq=1000\0"     \
+		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+		"bootcmd_net=run bootargs_base bootargs_nfs; "		\
+			"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
+		"bootargs_mmc=setenv bootargs ${bootargs} "     \
+			"root=/dev/mmcblk0p1 rootwait " \
+      "video=mxcfb0:dev=ldb,LDB-WSVGA,if=RGB666,bpp=32 " \
+      "video=mxcfb1:dev=ldb,LDB-WVGA,if=RGB666,bpp=32 ldb=sep0\0" \
+		"bootcmd_mmc=run bootargs_base bootargs_mmc; for dtype in " CONFIG_DRIVE_TYPES \
 		"; do " \
 			"for disk in 0 1 ; do ${dtype} dev ${disk} ;" \
 				"for fs in fat ext2 ; do " \
@@ -174,16 +186,9 @@
 		"echo ; echo serial console at 115200, 8N1 ; echo ; " \
 		"echo details at http://boundarydevices.com/6q_bootscript ; " \
 		"setenv stdout serial\0" \
-	"upgradeu=for dtype in " CONFIG_DRIVE_TYPES \
-		"; do " \
-		"for disk in 0 1 ; do ${dtype} dev ${disk} ;" \
-		     "for fs in fat ext2 ; do " \
-				"${fs}load ${dtype} ${disk}:1 10008000 " \
-					"/6x_upgrade " \
-					"&& source 10008000 ; " \
-			"done ; " \
-		"done ; " \
-	"done\0" \
+		"bootcmd=run bootcmd_mmc\0"                             \
+
+/* Hobart end-- */
 
 /* Miscellaneous configurable options */
 #define CONFIG_SYS_LONGHELP
