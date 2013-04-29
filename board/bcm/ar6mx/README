@@ -1,0 +1,23 @@
+U-Boot for AR6MX board
+-----------------------
+
+This file contains information for the port of 
+U-boot to the AR6MX board.
+
+1. Building U-boot for AR6MX
+-----------------------------
+To build U-boot for the AR6MXS board:
+
+  make ar6mxs_config
+  make
+
+To build U-boot for the AR6MXQ board:
+
+  make ar6mxq_config
+  make
+
+2. Flashing U-boot into the SD/uSD card
+---------------------------------------
+  sudo dd if=u-boot.imx of=/dev/sdx bs=512 seek=2; sync
+  (replace sdx with correct node for SD card)
+
