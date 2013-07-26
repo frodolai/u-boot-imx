@@ -160,7 +160,7 @@
 		"kernel=uImage\0"				\
 		"nfsroot=/opt/eldk/arm\0"				\
 		"bootargs_base=setenv bootargs console=ttymxc3,115200 "\
-		"vmalloc=400M consoleblank=0 nosmp arm_freq=1000\0"     \
+		"vmalloc=400M consoleblank=0 arm_freq=1000\0"     \
 		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
 			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
 		"bootcmd_net=run bootargs_base bootargs_nfs; "		\
