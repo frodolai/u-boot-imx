@@ -136,7 +136,7 @@
 	"bootargs_mmc1=console=ttymxc3,115200 console=tty1\0" \
 	"bootargs_mmc2a=video=mxcfb0:dev=hdmi,1920x1080M@60,if=RGB24,bpp=32 " \
 			"video=mxcfb1:off video=mxcfb2:off fbmem=28M\0" \
-	"bootargs_mmc2b=video=mxcfb0:dev=ldb,1024x600M@60,if=RGB666,bpp=32 " \
+	"bootargs_mmc2b=video=mxcfb0:dev=ldb,LDB-LQ070K1,if=RGB666,bpp=32 " \
 			"video=mxcfb1:off video=mxcfb2:off fbmem=28M\0" \
 	"bootargs_mmc3a=root=/dev/mmcblk0p1 rootwait consoleblank=0 \0" \
 	"bootargs_mmc3b=root=/dev/mmcblk0p2 rootwait consoleblank=0 \0" \
